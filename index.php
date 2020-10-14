@@ -49,7 +49,7 @@
         font-weight: bold;
     }
 
-    #cardBox {
+    .cardBox {
         display: flex;
         justify-content: space-between;
     }
@@ -75,14 +75,14 @@
         </div>
         <div id="dealerBox">
             <div>Dealer gets <?php print $dealer_score; ?></div>
-            <div id="cardBox">
+            <div class="cardBox">
                 <div class="card"><?php print $dealer_card_1; ?></div>
                 <div class="card"><?php print $dealer_card_2; ?></div>
             </div>
         </div>
         <div id="playerBox">
             <div>Player gets <?php print $player_score; ?></div>
-            <div id="cardBox">
+            <div class="cardBox">
                 <div class="card"><?php print $player_card_1; ?></div>
                 <div class="card"><?php print $player_card_2; ?></div>
             </div>
