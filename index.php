@@ -1,12 +1,9 @@
 <?php
- 
-    $year = rand(1991, 2020);
+    $time = rand(0, 100000);
 
-    if ($year % 400 === 0 || ($year % 4 === 0 && $year % 100 != 0)) {
-        $leap_year = $year . ' was a leap year';
-    } else {
-        $leap_year = $year . ' was not a leap year';
-    }
+    $hours = ($time - $time % 3600) / 3600;
+    $minutes = (($time - $hours * 3600) - ($time - $hours * 3600) % 60) / 60;
+    $seconds = $time - $hours * 3600 - $minutes * 60;
 
 ?>
 
@@ -16,7 +13,16 @@
     <meta charset="UTF-8">
     <title>Document</title>
 </head>
+
+<style>
+    body{
+        display: flex;
+        flex-direction: column;
+    }
+</style>
+
 <body>
-    <?php print $leap_year; ?>
+    <div><?php print 'Total seconds: ' . $time;?></div>
+    <div><?php print 'Converted to: ' . $hours . 'h ' . $minutes . 'min ' . $seconds . 'sec';?></div>
 </body>
 </html>
