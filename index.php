@@ -1,40 +1,13 @@
 <?php
-    $name = 'Laurynas';
-    $age = rand(15, 30);
-    $criminal = rand(0, 1);
-    $kids = rand(0, 5);
+ 
+    $year = rand(1991, 2020);
 
-    $verdict = $name;
-    
-    if ($age > 18 && $age < 25) {
-        $verdict .= ' keliauja į kariuomenę';
-
-        if ($criminal) {
-            $verdict =  $name . ' nekeliauja į kariuomenę nes yra banditas';
-            if ($kids >= 2) {
-                $verdict .= ' ir turi ' . $kids . ' vaikus';
-            }
-        } else if ($kids >= 2) {
-            $verdict = $name . ' nekeliauja į kariuomenę, nes turi ' . $kids . ' vaikus';
-        }
+    if ($year % 400 === 0 || ($year % 4 === 0 && $year % 100 != 0)) {
+        $leap_year = $year . ' was a leap year';
     } else {
-        $verdict .= ' nekeliauja į kariuomenę';
-
-        if ($age < 18) {
-            $verdict .= ' nes yra vaikas';
-        }
-        if ($age > 25) {
-            $verdict .= ' nes yra pensininkas';
-        }
-
-        if ($criminal) {
-            $verdict .= ' ir banditas';
-        }
-
-        if ($kids > 2) {
-            $verdict .= ' ir turi ' . $kids . ' vaikus';
-        }
+        $leap_year = $year . ' was not a leap year';
     }
+
 ?>
 
 <!DOCTYPE html>
@@ -44,6 +17,6 @@
     <title>Document</title>
 </head>
 <body>
-    <?php print $verdict ?>
+    <?php print $leap_year; ?>
 </body>
 </html>
