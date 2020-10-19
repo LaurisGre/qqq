@@ -1,30 +1,12 @@
 <?php 
-    $coordX = 10;
-    $coordY = 10;
-
-    $coordX2 = 10;
-    $coordY2 = 10;
-
-    for($i = 0 ; $i < $coordY ; $i++) {
-        for($u = 10 ; $u >= $coordX ; $u--){
-            print '*';
-            if ($u === $coordX){
-                $coordX--;
-                break;
-            }
+    for ($num = 1; $num < 10; $num++) {
+        print '<div class="card">';
+        for ($i = 1; $i <= 9; $i++) {
+            $result = $num * $i;
+            print "$num x $i = $result";
+            print "<br />";
         }
-        print '<br />';
-    }
-
-    for($i = 0 ; $i < $coordY2 ; $i++) {
-        for($u = 1 ; $u <= $coordX2 ; $u++){
-            print '*';
-            if ($u === $coordX2){
-                $coordX2--;
-                break;
-            }
-        }
-        print '<br />';
+        print '</div>';
     }
 ?>
 <!DOCTYPE html>
@@ -33,9 +15,15 @@
     <meta charset="UTF-8">
     <title>Document</title>
     <style>
-        *{
-            padding: 0;
-            margin: 0;
+        body{
+            display: flex;
+        }
+
+        .card {
+            padding: 5px;
+            margin: 5px;
+            border: 1px solid black;
+            height: 160px;
         }
     </style>
 </head>
