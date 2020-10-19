@@ -1,6 +1,31 @@
 <?php 
-    $cards_total = rand(10, 50);
-    $h3 = "Iš viso kortelių: $cards_total";
+    $coordX = 10;
+    $coordY = 10;
+
+    $coordX2 = 10;
+    $coordY2 = 10;
+
+    for($i = 0 ; $i < $coordY ; $i++) {
+        for($u = 10 ; $u >= $coordX ; $u--){
+            print '*';
+            if ($u === $coordX){
+                $coordX--;
+                break;
+            }
+        }
+        print '<br />';
+    }
+
+    for($i = 0 ; $i < $coordY2 ; $i++) {
+        for($u = 1 ; $u <= $coordX2 ; $u++){
+            print '*';
+            if ($u === $coordX2){
+                $coordX2--;
+                break;
+            }
+        }
+        print '<br />';
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -8,38 +33,12 @@
     <meta charset="UTF-8">
     <title>Document</title>
     <style>
-        body{
-            text-align: center;
-        }
-
-        .box{
-            width: 600px;
-            display: flex;
-            flex-wrap: wrap;
-            margin: 0 auto;
-            background-color: red;
-            text-align: center;
-        }
-
-        .card{
-            width: 180px;
-            height: 60px;
-            margin: 10px;
-            background-color: lawngreen;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        *{
+            padding: 0;
+            margin: 0;
         }
     </style>
 </head>
 <body>
-    <h3><?php print $h3; ?></h3>
-    <div class='box'>
-    <?php 
-        for($i = 1 ; $i <= $cards_total ; $i++) {
-            print "<div class='card'>$i</div>";
-    }
-    ?>
-    </div>
 </body>
 </html>
