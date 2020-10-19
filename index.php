@@ -1,10 +1,13 @@
 <?php 
-    for ($num = 1; $num < 10; $num++) {
-        print '<div class="card">';
-        for ($i = 1; $i <= 9; $i++) {
-            $result = $num * $i;
-            print "$num x $i = $result";
-            print "<br />";
+    for($u = 0; $u < 8; $u++) {
+        print '<div class="row">';
+        for($i = 0; $i < 8; $i++){
+            $sum = $i + $u;
+            if ($sum % 2 === 0) {
+                print "<div class='card black'>$sum</div>"; 
+            } else {
+                print "<div class='card '>$sum</div>";
+            }
         }
         print '</div>';
     }
@@ -15,15 +18,19 @@
     <meta charset="UTF-8">
     <title>Document</title>
     <style>
-        body{
+
+        .card {
+            height: 40px;
+            width: 40px;
+            border: 1px solid black;
+        }
+
+        .row {
             display: flex;
         }
 
-        .card {
-            padding: 5px;
-            margin: 5px;
-            border: 1px solid black;
-            height: 160px;
+        .black{
+            background-color: black;
         }
     </style>
 </head>
