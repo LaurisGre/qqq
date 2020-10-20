@@ -1,46 +1,6 @@
 <?php
-
-for($i = 1 ; $i <= 5 ; $i++) {
-    for($u = 1 ; $u <= 3 ; $u++){
-        if (($u === 1 && ($i ===2 || $i === 3 || $i === 4 || $i === 5)) || 
-        ($u === 2 && ($i ===1 || $i === 3)) ||
-        ($u === 3 && ($i ===2 || $i === 3 || $i === 4 || $i === 5))
-        ) {
-            print '.O.';
-        } else {
-            print '_._';
-        }
-    }
-    print '<br />';
-}
-print '<br />';
-for($i = 1 ; $i <= 5 ; $i++) {
-    for($u = 1 ; $u <= 3 ; $u++){
-        if (($u === 1 && ($i === 1 || $i === 2 || $i === 3 || $i === 4 || $i === 5)) || 
-        ($u === 2 && ($i ===1 || $i === 3 || $i === 5)) ||
-        ($u === 3 && ($i ===2 || $i === 4))
-        ) {
-            print '.O.';
-        } else {
-            print '_._';
-        }
-    }
-    print '<br />';
-}
-print '<br />';
-for($i = 1 ; $i <= 5 ; $i++) {
-    for($u = 1 ; $u <= 3 ; $u++){
-        if (($u === 1 && ($i === 2 || $i === 3 || $i === 4)) || 
-        ($u === 2 && ($i ===1 || $i === 5)) ||
-        ($u === 3 && ($i ===1 || $i === 5))
-        ) {
-            print '.O.';
-        } else {
-            print '_._';
-        }
-    }
-    print '<br />';
-}
+    $speed_of_sound = 333;
+    $max_db = 120;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -51,5 +11,15 @@ for($i = 1 ; $i <= 5 ; $i++) {
     </style>
 </head>
 <body>
+    <h1>Griaustinio zona</h1>
+    <?php for($t = 1; $t <= 60; $t++): ?>
+        <p>
+            <?php 
+            $dist = $t * $speed_of_sound;
+            $sound = round(($max_db * 0.75 ** $t), 3);
+            print "Po $t sec $dist m. : $sound db"; 
+            ?>
+        </p> 
+    <?php endfor; ?>
 </body>
 </html>
