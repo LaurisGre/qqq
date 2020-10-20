@@ -1,16 +1,18 @@
-<?php 
-    for($u = 0; $u < 8; $u++) {
-        print '<div class="row">';
-        for($i = 0; $i < 8; $i++){
-            $sum = $i + $u;
-            if ($sum % 2 === 0) {
-                print "<div class='card black'>$sum</div>"; 
-            } else {
-                print "<div class='card '>$sum</div>";
-            }
+<?php
+
+for($i = 1 ; $i <= 5 ; $i++) {
+    for($u = 1 ; $u <= 3 ; $u++){
+        if (($u === 2 && ($i ===1 || $i === 3)) || 
+        ($u === 1 && ($i ===2 || $i === 3 || $i === 4 || $i === 5)) || 
+        ($u === 3 && ($i ===2 || $i === 3 || $i === 4 || $i === 5))
+        ) {
+            print '.O.';
+        } else {
+            print '_._';
         }
-        print '</div>';
     }
+    print '<br />';
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,20 +20,6 @@
     <meta charset="UTF-8">
     <title>Document</title>
     <style>
-
-        .card {
-            height: 40px;
-            width: 40px;
-            border: 1px solid black;
-        }
-
-        .row {
-            display: flex;
-        }
-
-        .black{
-            background-color: black;
-        }
     </style>
 </head>
 <body>
