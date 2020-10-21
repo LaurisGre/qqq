@@ -1,29 +1,41 @@
 <?php
-    $height = rand(10, 30);
+    $name = [
+        'Bob',
+        'John',
+        'Chad',
+        'Garry',
+        'Ronald'
+    ];
 
-    for($i = 0; $i < $height; $i++) {
-        for ($u = 0; $u < $i; $u++) {
-            $ornament = rand(1, 30);
-            if ($ornament != 1 && $ornament != 2 && $ornament != 3) {
-                print '*';
-            } else if ($ornament === 1) {
-                print 'O';
-            } else if ($ornament === 2) {
-                print 'X';
-            } else {
-                print '[]';
-            }
-        }
-        if ($i != $height -1) {
-            print '</br>';
-        }
+    $surname = [
+        'Bobson',
+        'Johnson',
+        'Chadman',
+        'Garrion',
+        'Ronman'
+    ];
+
+    $players = [];
+    $max_score = 100;
+
+    for ($i = 1 ; $i <= 10 ; $i++) {
+        $random_name = rand(0, 4);
+        $random_surname = rand(0, 4);
+        $random_score = 100 - 10 * $i + rand(1, 10);
+
+        $players[] = [
+            'name' => "$name[$random_name] $surname[$random_surname]",
+            'score' => $random_score,
+            'rank' => $i,
+        ];
     }
 
-    for($i = 0; $i <= 2; $i++) {
-        for ($u = 0; $u < $i; $u++) {
-            print '*';
-        }
-        print '</br>';
+    print "Rank | Name | Score";
+    print '<br>';
+
+    foreach($players as $player) {
+        print $player['rank'] . ' | ' . $player['name'] . ' | ' . $player['score'];
+        print '<br>';
     }
 ?>
 <!DOCTYPE html>
@@ -38,6 +50,5 @@
     </style>
 </head>
 <body>
-
 </body>
 </html>
