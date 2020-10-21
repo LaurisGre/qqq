@@ -1,54 +1,40 @@
 <?php
-    $name = [
-        'Bob',
-        'John',
-        'Chad',
-        'Garry',
-        'Ronald'
-    ];
+    $work_time = 12;
+    $profit = 0;
+    $people_spin = 0;
+    $people_left = 0;
+    $total_spins = 0;
 
-    $surname = [
-        'Bobson',
-        'Johnson',
-        'Chadman',
-        'Garrion',
-        'Ronman'
-    ];
-
-    $players = [];
-    $max_score = 100;
-
-    for ($i = 1 ; $i <= 10 ; $i++) {
-        $random_name = rand(0, 4);
-        $random_surname = rand(0, 4);
-        $random_score = 100 - 10 * $i + rand(1, 10);
-
-        $players[] = [
-            'name' => "$name[$random_name] $surname[$random_surname]",
-            'score' => $random_score,
-            'rank' => $i,
-        ];
+    for ($i = 0; $i < 12; $i++) {
+        $people_per_hour = rand(1, 20);
+        if ($people_per_hour >= 10) {
+            $total_spins++;
+            $profit += 130;
+            $people_spin += 10;
+            $people_left += $people_per_hour - 10;
+        } else {
+            $people_left += $people_per_hour;
+        }
     }
 
-    print "Rank | Name | Score";
-    print '<br>';
+    $p1 = "Karusele uzdirbo $profit jevru";
+    $p2 = "Prasisuko $people_spin zmones";
+    $p3 = "Isejo $people_left zmogai";
+    $p4 = "Pilnu pakrovimu karusele sukosi $total_spins";
 
-    foreach($players as $player) {
-        print $player['rank'] . ' | ' . $player['name'] . ' | ' . $player['score'];
-        print '<br>';
-    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Christmas in October??</title>
+    <title>Carusele</title>
     <style>
-        body {
-            text-align: center;
-        }
     </style>
 </head>
 <body>
+    <p><?php print $p1; ?></p>
+    <p><?php print $p2; ?></p>
+    <p><?php print $p3; ?></p>
+    <p><?php print $p4; ?></p>
 </body>
 </html>
