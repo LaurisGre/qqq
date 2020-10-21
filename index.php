@@ -1,33 +1,43 @@
 <?php
-    $days_in_month = 31;
-    $random_day = rand(1, 31);
-    $price_per_kwh = 0.07;
-    $total_kwh_used = 0;
+    $height = rand(10, 30);
 
-    for($i = 0; $i < $days_in_month; $i++){
-        $used_ped_day = rand(2, 5);
-        $total_kwh_used += $used_ped_day;
-        print "$i";
-        print "<br />";
-        if($i === $random_day) {
-            break;
+    for($i = 0; $i < $height; $i++) {
+        for ($u = 0; $u < $i; $u++) {
+            $ornament = rand(1, 30);
+            if ($ornament != 1 && $ornament != 2 && $ornament != 3) {
+                print '*';
+            } else if ($ornament === 1) {
+                print 'O';
+            } else if ($ornament === 2) {
+                print 'X';
+            } else {
+                print '[]';
+            }
+        }
+        if ($i != $height -1) {
+            print '</br>';
         }
     }
 
-    $total_price = $total_kwh_used * $price_per_kwh;
-    print "Iki $random_day mėnesio dienos bus saunaudota $total_kwh_used kwh";
-    print "<br />";
-    print "Reiks sumokėti $$total_price";
-
+    for($i = 0; $i <= 2; $i++) {
+        for ($u = 0; $u < $i; $u++) {
+            print '*';
+        }
+        print '</br>';
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Electricity billt</title>
+    <title>Christmas in October??</title>
     <style>
+        body {
+            text-align: center;
+        }
     </style>
 </head>
 <body>
+
 </body>
 </html>
