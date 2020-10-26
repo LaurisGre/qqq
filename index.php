@@ -21,7 +21,7 @@
             'brand' => 'Aston Martin',
             'model' => 'DB5',
             'year' => 1963,
-            'price' => 100,
+            'price' => 1500,
             'on_sale' => rand(0, 1)
         ],
         [
@@ -68,12 +68,28 @@
 
     shuffle($cars_array);
 
-    $car_brand = ['Dodge', 'Lada'];
+    $car_brand = ['Aston Martin', 'Lada', 'Dodge'];
     $cars_by_brand = [];
+    $min_price = 999;
+    $cars_by_min_price = [];
+    $max_price = 6000;
+    $cars_final_sort = [];
 
     foreach($cars_array as $car) {
         if (in_array($car['brand'], $car_brand)) {
             $cars_by_brand[] = $car;
+        }
+    }
+
+    foreach($cars_by_brand as $car) {
+        if ($car['price'] > $min_price) {
+            $cars_by_min_price[] = $car;
+        }
+    }
+
+    foreach($cars_by_min_price as $car) {
+        if ($car['price'] < $max_price) {
+            $cars_final_sort[] = $car;
         }
     }
 
@@ -135,7 +151,7 @@
 </head>
 <body>
     <div class="car_box">
-        <?php foreach($cars_by_brand as $car): ?>
+        <?php foreach($cars_final_sort as $car): ?>
             <div class="car_card">
                 <img src="<?php print $car['image'] ?>" alt="">
                 <p><?php print $car['brand'] . ' ' . $car['model'] ?></p>
