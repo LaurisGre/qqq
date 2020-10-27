@@ -1,32 +1,19 @@
 <?php
     $matrix_array = [
-        [
-            [1, 2, 3],
-            [3, 2, 1],
-            [1, 1, 1],
-        ],
-        [
-            [2, 2, 1],
-            [3, 2, 3],
-            [1, 1, 3],
-        ]
+        [0, 0, 1],
+        [1, 0, 1],
+        [0, 1, 0],
     ];
 
-    $matrix_sum = [
-        [0,0,0],
-        [0,0,0],
-        [0,0,0],
-    ];
+    $new_matrix = [];
 
-    foreach($matrix_array as $matrix) {
-        foreach($matrix as $r => $row) {
-            foreach($row as $n => $num) {
-                $matrix_sum[$r][$n] += $num;
-            }
+    foreach($matrix_array as $r => $row) {
+        foreach($row as $n => $num) {
+            $new_matrix[$r][$n] = $num == 0 ? 1 : 0;
         }
     }
     
-    var_dump($matrix_sum);
+    var_dump($new_matrix);
 ?>
 <!DOCTYPE html>
 <html lang="en">
