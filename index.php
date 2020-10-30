@@ -137,14 +137,14 @@ function check_straight($hand)
     //sort the hand by numerical value
     sort($hand_cards);
 
-    //for loop to check if the sorted cards are in the correct order
+    //loop to check if the sorted cards are in the correct order
     for ($i = 0; $i < 4; $i++) {
         //four cycles to check if each card is in the correct order
         if (!($hand_cards[$i] + 1  === $hand_cards[$i + 1])) {
             //if the condition is false check if it's a wrap straight
             //every wrap straight has a 2 and an Ace
             if ($hand_cards[0] === 2 && $hand_cards[4] === 14) {
-                //check if the face cards are in order
+                //check if the rest of the cards are in order
                 for ($u = $i + 1; $u < 4; $u++) {
                     if (!($hand_cards[$u] + 1  === $hand_cards[$u + 1])) {
                         return 'NO';
