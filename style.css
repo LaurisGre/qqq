@@ -1,8 +1,15 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Rye', cursive;
+}
+
 body {
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
 }
 
 .table{
@@ -16,14 +23,14 @@ body {
     border-radius: 20px;
 
     width: 800px;
-    height: 300px;
+    height: 450px;
     padding: 30px 10px;
 }
 
 .table__text {
     color: white;
     font-size: 30px;
-    font-weight: bold;
+    text-align: center;
 }
 
 .table__cards {
@@ -50,7 +57,7 @@ body {
 .card__text {
     width: 100%;
     display: flex;
-    font-size: 30px;
+    font-size: 20px;
     font-weight: bold;
 }
 
