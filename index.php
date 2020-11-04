@@ -1,21 +1,21 @@
 <?php
 
-$print = false;
-$enter = 'Please enter the number higher than 1';
+$report = 'Choose your weather';
 
-if(isset($_POST['sub'])) {
-	if(isset($_POST['num']) && is_numeric($_POST['num']) && $_POST['num'] > 1) {
-		$print = true;
-	}	
-}
-
-function tree_maker($num)
-{
-	for ($i = 1 ; $i <= $num ; $i++) {
-		for ($u = 0 ; $u < $i ; $u++) {
-			print '*';
-		}
-		print '</br>';
+if (isset($_POST['sub'])) {
+	switch ($_POST['weather']) {
+		case 'rainy':
+			$report = 'It will be rainy';
+			break;
+		case 'sunny':
+			$report = 'It will be sunny';
+			break;
+		case 'snowy':
+			$report = 'It will be snowy';
+			break;
+		case 'cloudy':
+			$report = 'It will be cloudy';
+			break;
 	}
 }
 
@@ -31,12 +31,17 @@ function tree_maker($num)
 
 <body>
 	<section>
+		<p>Select the weather type:</p>
 		<form method="POST">
-			<p>Enter number:</p>
-			<input type="text" name="num">
+			<select name="weather" id="">
+				<option value="rainy">rainy</option>
+				<option value="sunny">sunny</option>
+				<option value="snowy">snowy</option>
+				<option value="cloudy">cloudy</option>
+			</select>
 			<input type="submit" name="sub">
 		</form>
-		<div class="tree"><?php $print ? tree_maker($_POST['num']) : print $enter; ?></div>
+		<p><?php print $report; ?></p>
 	</section>
 </body>
 
