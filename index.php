@@ -1,7 +1,22 @@
 <?php
-$size = 0;
-if (isset($_POST['range'])) {
-    $size += $_POST['range'];
+
+$print = false;
+$enter = 'Please enter the number higher than 1';
+
+if(isset($_POST['sub'])) {
+	if(isset($_POST['num']) && is_numeric($_POST['num']) && $_POST['num'] > 1) {
+		$print = true;
+	}	
+}
+
+function tree_maker($num)
+{
+	for ($i = 1 ; $i <= $num ; $i++) {
+		for ($u = 0 ; $u < $i ; $u++) {
+			print '*';
+		}
+		print '</br>';
+	}
 }
 
 ?>
@@ -9,26 +24,20 @@ if (isset($_POST['range'])) {
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="style.css">
-    <title>Tuesday Forms</title>
-    <style>
-        .mango {
-            background-image: url('https://i.pinimg.com/736x/72/2c/ac/722cac5d77e14ae3b0970cfd35fb8b36.jpg');
-            background-size: cover;
-            height: <?php print $size; ?>px;
-            width: <?php print $size; ?>px;
-        }
-    </style>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="style.css">
+	<title>Wednesday Forms</title>
 </head>
 
 <body>
-    <h1>GROW ME!!!</h1>
-    <form method="POST">
-        <input type="range" min="100" max="200" value="<?php print $size; ?>" name="range">
-        <input type="submit" name="sub">
-    </form>
-    <div class="mango"></div>
+	<section>
+		<form method="POST">
+			<p>Enter number:</p>
+			<input type="text" name="num">
+			<input type="submit" name="sub">
+		</form>
+		<div class="tree"><?php $print ? tree_maker($_POST['num']) : print $enter; ?></div>
+	</section>
 </body>
 
 </html>
