@@ -1,36 +1,8 @@
 <?php
-
-$number_array = [838, 121, 344, 555, 768, 878, 987, 345, 565];
-
-function sort_pal(&$arr) {
-    foreach($arr as $index => &$number) {
-        if (!(substr($number, 0, 1) === substr($number, -1, 1)) ) {
-            array_splice($arr, $index, 1);
-        }
-    }
+$size = 0;
+if (isset($_POST['range'])) {
+    $size += $_POST['range'];
 }
-
-sort_pal($number_array);
-var_dump($number_array);
-
-////
-
-$string = 'mano batai buvo du';
-
-function spongemock(&$str) {
-    $upper = true;
-    for ($i = 0 ; $i < strlen($str) ; $i++) {
-        if ($str[$i] != ' ') {
-            $upper ?
-            $str[$i] = strtoupper($str[$i]):
-            $str[$i] = strtolower($str[$i]);
-            $upper = !$upper;
-        }
-    }
-}
-
-spongemock($string);
-var_dump($string);
 
 ?>
 <!DOCTYPE html>
@@ -39,10 +11,24 @@ var_dump($string);
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="style.css">
-    <title>EZ Tuesday</title>
+    <title>Tuesday Forms</title>
+    <style>
+        .mango {
+            background-image: url('https://i.pinimg.com/736x/72/2c/ac/722cac5d77e14ae3b0970cfd35fb8b36.jpg');
+            background-size: cover;
+            height: <?php print $size; ?>px;
+            width: <?php print $size; ?>px;
+        }
+    </style>
 </head>
 
 <body>
+    <h1>GROW ME!!!</h1>
+    <form method="POST">
+        <input type="range" min="100" max="200" value="<?php print $size; ?>" name="range">
+        <input type="submit" name="sub">
+    </form>
+    <div class="mango"></div>
 </body>
 
 </html>
