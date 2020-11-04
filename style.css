@@ -24,6 +24,7 @@ form {
 	width: 400px;
 	display: flex;
 	justify-content: center;
+	flex-direction: column;
 }
 
 input {
