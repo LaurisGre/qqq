@@ -1,30 +1,35 @@
 <?php
-$message_sent = false;
-$data = [];
 
-function prep_data(array $data): array
+$show_report = false;
+
+function transform_string(string $str, int $multi): string
 {
-	$preped_arr = [];
-	foreach ($data as $index => $value) {
-		if ($value !== 'Send') {
-			$preped_arr[] = "$index: $value";
+	$new_string = '';
+
+	for ($i = 0; $i < strlen($str); $i++) {
+		if ($str[$i] != ' ') {
+			for ($u = 0; $u < $multi; $u++) {
+				$new_string .= $str[$i];
+			}
+		} else {
+			$new_string .= ' ';
 		}
 	}
 
-	return $preped_arr;
+	return $new_string;
 }
 
-function validate_field_not_empty(string $value): bool
-{
-	if ($value === '') {
-		return false;
+if (isset($_POST['submit'])) {
+	if ($_POST['string'] !== '') {
+		if ($_POST['multi'] > 0) {
+			$report = transform_string($_POST['string'], $_POST['multi']);
+		} else {
+			$report = 'Please enter a number higher than 0';
+		}
+	} else {
+		$report = 'Please enter a word';
 	}
-	return true;
-}
-
-if (isset($_POST['sub'])) {
-	$message_sent = true;
-	$data = prep_data($_POST);
+	$show_report = true;
 }
 
 ?>
@@ -36,54 +41,22 @@ if (isset($_POST['sub'])) {
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="style.css">
 	<link href="https://fonts.googleapis.com/css2?family=Rye&display=swap" rel="stylesheet">
-	<title>Thurday Forms</title>
+	<title>EZ Friday? Forms</title>
 </head>
 
 <body>
-	<?php if (!$message_sent) : ?>
-		<article class="message_send">
-			<header>WRITTE US A MESSAGE</header>
-			<form method="POST">
-				<input type="text" name="Name" placeholder="Your name" required>
-				<section class="split">
-					<input type="email" name="eMail" placeholder="eMail address" required>
-					<input type="number" name="Phone" placeholder="Phone number">
-				</section>
-				<p>I would like to contact:</p>
-				<label>
-					<input type="radio" name="Contact" value="Sales Department" required>
-					<p>Sales Department</p>
-				</label>
-				<label>
-					<input type="radio" name="Contact" value="Administration" required>
-					<p>Administration</p>
-				</label>
-				<label>
-					<input type="radio" name="Contact" value="Client Management" required>
-					<p>Client Management</p>
-				</label>
-				<select name="Subject" id="">
-					<option value="complaint">Complaint</option>
-					<option value="suggestion">Suggestion</option>
-					<option value="question">Question</option>
-				</select>
-				<textarea name="Message" placeholder="Your message here"></textarea>
-				<input type="submit" name="sub" value="Send" class="butt">
-			</form>
-		</article>
-	<?php else : ?>
-		<article class="message_info">
-			<header>
-				<p>Thank you for your message, <?php print $_POST['Name']; ?></p>
-				<section>
-					<p>Your message info:</p>
-					<?php foreach ($data as $value) : ?>
-						<p><?php print $value; ?></p>
-					<?php endforeach; ?>
-				</section>
-			</header>
-		</article>
-	<?php endif; ?>
+	<section>
+		<form method="POST">
+			<input type="text" name="string" id="" placeholder="words here">
+			<input type="number" name="multi" id="" placeholder="number here">
+			<input type="submit" name="submit" id="">
+		</form>
+	</section>
+	<section>
+		<?php if ($show_report) : ?>
+			<p><?php print $report; ?></p>
+		<?php endif; ?>
+	</section>
 </body>
 
 </html>
