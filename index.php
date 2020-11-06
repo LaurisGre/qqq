@@ -1,35 +1,55 @@
 <?php
+$show_mess = false;
+$log_message = '';
 
-$show_report = false;
+$users = [
+	[
+		'user_email' => 'jonas@jonas.com',
+		'password' => 'jonasjonas',
+	],
+	[
+		'user_email' => 'plovas@plovas.com',
+		'password' => 'plovasplovas',
+	],
+	[
+		'user_email' => 'klonas@klonas.com',
+		'password' => 'klonasklonas',
+	],
+];
 
-function transform_string(string $str, int $multi): string
+function password_match(array $data): bool
 {
-	$new_string = '';
+	return $data['pass1'] === $data['pass2'];
+}
 
-	for ($i = 0; $i < strlen($str); $i++) {
-		if ($str[$i] != ' ') {
-			for ($u = 0; $u < $multi; $u++) {
-				$new_string .= $str[$i];
-			}
-		} else {
-			$new_string .= ' ';
+function validate_user(string $new_user, array &$user_data, string &$message)
+{
+	$message = '';
+
+	foreach ($user_data as $user) {
+		if ($user['user_email'] === $new_user) {
+			return $message = 'User with this email already exists';
 		}
 	}
 
-	return $new_string;
+	$user_data[] = [
+		'user_email' => $_POST['email'],
+		'password' => $_POST['pass1'],
+	];
+
+	$message = 'Congratulations you signed up!';
 }
 
 if (isset($_POST['submit'])) {
-	if ($_POST['string'] !== '') {
-		if ($_POST['multi'] > 0) {
-			$report = transform_string($_POST['string'], $_POST['multi']);
+	if ($_POST['pass1'] !== '' && $_POST['pass1'] !== '') {
+		if (password_match($_POST)) {
+			validate_user($_POST['email'], $users, $log_message);
 		} else {
-			$report = 'Please enter a number higher than 0';
+			$log_message = 'ERROR PASSWORD INCONSISTENCY DETECTED';
 		}
-	} else {
-		$report = 'Please enter a word';
 	}
-	$show_report = true;
+	var_dump($users);
+	$show_mess = true;
 }
 
 ?>
@@ -45,18 +65,20 @@ if (isset($_POST['submit'])) {
 </head>
 
 <body>
-	<section>
+	<article>
 		<form method="POST">
-			<input type="text" name="string" id="" placeholder="words here">
-			<input type="number" name="multi" id="" placeholder="number here">
-			<input type="submit" name="submit" id="">
+			<p>eMail:</p>
+			<input type="email" name="email" placeholder="email address">
+			<p>Password:</p>
+			<input type="password" name="pass1" placeholder="password">
+			<p>Repeat Password:</p>
+			<input type="password" name="pass2" placeholder="repeat password">
+			<input class="button" type="submit" name="submit" id="" value="Sign In">
 		</form>
-	</section>
-	<section>
-		<?php if ($show_report) : ?>
-			<p><?php print $report; ?></p>
+		<?php if ($show_mess) : ?>
+			<p><?php print $log_message; ?></p>
 		<?php endif; ?>
-	</section>
+	</article>
 </body>
 
 </html>
