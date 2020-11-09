@@ -33,3 +33,28 @@ input {
 .button {
 	cursor: pointer;
 }
+
+.card_box {
+	width: 300px;
+	display: flex;
+	justify-content: space-around;
+	padding: 10px;
+}
+
+.card {
+	height: 50px;
+	width: 50px;
+	border-radius: 10px;
+}
+
+.card-1 {
+	background-color: red;
+}
+
+.card-0 {
+	background-color: blue;
+}
+
+.win_box {
+	text-align: center;
+}

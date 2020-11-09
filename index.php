@@ -1,55 +1,45 @@
 <?php
-$show_mess = false;
-$log_message = '';
-
-$users = [
-	[
-		'user_email' => 'jonas@jonas.com',
-		'password' => 'jonasjonas',
-	],
-	[
-		'user_email' => 'plovas@plovas.com',
-		'password' => 'plovasplovas',
-	],
-	[
-		'user_email' => 'klonas@klonas.com',
-		'password' => 'klonasklonas',
-	],
+$show_win = false;
+$message = '';
+$cards = [
+	'card1' => 0,
+	'card2' => 0,
+	'card3' => 0,
+	'card4' => 0,
 ];
 
-function password_match(array $data): bool
+function spin(array &$cards)
 {
-	return $data['pass1'] === $data['pass2'];
+	foreach ($cards as &$card) {
+		$card = rand(0, 1);
+	}
 }
 
-function validate_user(string $new_user, array &$user_data, string &$message)
+function check_win(array $cards): bool
 {
-	$message = '';
-
-	foreach ($user_data as $user) {
-		if ($user['user_email'] === $new_user) {
-			return $message = 'User with this email already exists';
+	foreach ($cards as $card) {
+		if ($card != $cards['card1']) {
+			return false;
 		}
 	}
 
-	$user_data[] = [
-		'user_email' => $_POST['email'],
-		'password' => $_POST['pass1'],
-	];
-
-	$message = 'Congratulations you signed up!';
+	return true;
 }
 
-if (isset($_POST['submit'])) {
-	if ($_POST['pass1'] !== '' && $_POST['pass1'] !== '') {
-		if (password_match($_POST)) {
-			validate_user($_POST['email'], $users, $log_message);
-		} else {
-			$log_message = 'ERROR PASSWORD INCONSISTENCY DETECTED';
-		}
+function print_cash(bool $check): string
+{
+	return $check ? 'You won $' . $_POST['bet'] * 4 : 'You lost $' . $_POST['bet'];
+}
+
+if (isset($_POST['sub'])) {
+	if ($_POST['bet'] > 0) {
+		spin($cards);
+		$message = print_cash(check_win($cards));
+	} else {
+		$message = 'Please enter your bet';
 	}
-	var_dump($users);
-	$show_mess = true;
+
+	$show_win = true;
 }
 
 ?>
@@ -61,22 +51,24 @@ if (isset($_POST['submit'])) {
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="style.css">
 	<link href="https://fonts.googleapis.com/css2?family=Rye&display=swap" rel="stylesheet">
-	<title>EZ Friday? Forms</title>
+	<title>Lotto</title>
 </head>
 
 <body>
 	<article>
 		<form method="POST">
-			<p>eMail:</p>
-			<input type="email" name="email" placeholder="email address">
-			<p>Password:</p>
-			<input type="password" name="pass1" placeholder="password">
-			<p>Repeat Password:</p>
-			<input type="password" name="pass2" placeholder="repeat password">
-			<input class="button" type="submit" name="submit" id="" value="Sign In">
+			<input type="number" name="bet" id="" placeholder="your bet here" value=<?php print $_POST['bet'] ?? '' ?>>
+			<input class="button" type="submit" name="sub" id="" value="Play!">
 		</form>
-		<?php if ($show_mess) : ?>
-			<p><?php print $log_message; ?></p>
+		<section class="card_box">
+			<?php foreach ($cards as $card) : ?>
+				<div class="card card-<?php print $card; ?>"></div>
+			<?php endforeach; ?>
+		</section>
+		<?php if ($show_win) : ?>
+			<section class="win_box">
+				<p><?php print $message; ?></p>
+			</section>
 		<?php endif; ?>
 	</article>
 </body>
